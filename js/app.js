@@ -19,7 +19,6 @@ botonSaludo.addEventListener("click", () => {
 
 // PASO 3. Arreglo de objetos: cada objeto representa un tema.
 const temas = [
-  { titulo: "Validación de formularios", detalle: "Comprobar los datos antes de guardarlos." },
   { titulo: "Variables y funciones", detalle: "Guardar valores y reutilizar operaciones." },
   { titulo: "Arreglos y objetos", detalle: "Organizar información estructurada." },
   { titulo: "Eventos y DOM", detalle: "Responder al usuario y modificar la página." }
@@ -58,7 +57,8 @@ formularioTema.addEventListener("submit", (evento) => {
     mensajeTema.textContent = "Escribe un tema de al menos 3 caracteres.";
     return;
   }
-  temas.push({ titulo, detalle: "Tema agregado durante la práctica." });
+  // Reto 2: unshift agrega el tema al inicio del arreglo, así aparece primero.
+  temas.unshift({ titulo, detalle: "Tema agregado durante la práctica." });
   mostrarTemas();
   formularioTema.reset();
   mensajeTema.textContent = "Tema agregado correctamente.";
@@ -89,8 +89,14 @@ function validarRegistro(nombre, correo, rol) {
   mostrarError("correo", "");
   mostrarError("rol", "");
 
-  if (nombre.length < 5) {
-    mostrarError("nombre", "Ingresa al menos 5 caracteres.");
+  // Reto 4: el nombre debe tener entre 5 y 50 caracteres.
+  if (nombre.length < 5 || nombre.length > 50) {
+    // Se usa el primer nombre que escribió el usuario para personalizar el mensaje.
+    const primerNombre = nombre.split(" ")[0] || "Usuario";
+    mostrarError(
+      "nombre",
+      `${primerNombre}, tu nombre debe tener mínimo 5 y máximo 50 caracteres.`
+    );
     esValido = false;
   }
   if (!correoValido(correo)) {

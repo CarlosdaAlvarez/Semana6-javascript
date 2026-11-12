@@ -12,9 +12,11 @@ function saludar() {
     // Obtener el valor ingresado
     const nombreUsuario = nombre.value.trim();
 
-    // Reto: el nombre debe tener al menos 5 caracteres
-    if (nombreUsuario.length < 5) {
-        mensaje.textContent = "Escribe un nombre de al menos 5 caracteres.";
+    // Reto 4: el nombre debe tener entre 5 y 50 caracteres
+    if (nombreUsuario.length < 5 || nombreUsuario.length > 50) {
+        const primerNombre = nombreUsuario.split(" ")[0] || "Usuario";
+        mensaje.textContent =
+            primerNombre + ", tu nombre debe tener mínimo 5 y máximo 50 caracteres.";
         return;
     }
 
